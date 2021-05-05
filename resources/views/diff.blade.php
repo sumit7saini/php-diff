@@ -20,19 +20,19 @@
 			</thead>
 			<tbody>
 				<?php foreach($data['common'] as $name): ?>
-					<tr onclick="window.location.href='diff-file/<?= $name ?>';return false;">
+					<tr onclick="window.location.href='diff-file/<?= $data['folder'].'/'.$name ?>';return false;">
 						<td><?= $name ?></td>
 						<td><?= $name ?></td>
 					</tr>
 				<?php endforeach ?>
 				<?php foreach($data['onlyinv1'] as $name): ?>
-					<tr onclick="window.location.href='diff-file/<?= $name ?>';return false;">
+					<tr onclick="window.location.href='diff-file/<?= $data['folder'].'/'.$name ?>';return false;">
 						<td><?= $name ?></td>
 						<td></td>
 					</tr>
 				<?php endforeach ?>
 				<?php foreach($data['onlyinv2'] as $name): ?>
-					<tr onclick="window.location.href='diff-file/<?= $name ?>';return false;">
+					<tr onclick="window.location.href='diff-file/<?= $data['folder'].'/'.$name ?>';return false;">
 						<td></td>
 						<td><?= $name ?></td>
 					</tr>

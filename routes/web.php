@@ -16,5 +16,5 @@ use App\Http\Controllers\DiffController;
 
 Route::get('/', [DiffController::class, 'index']);
 Route::post('/diff-files', [DiffController::class, 'filesUploaded']);
-Route::get('/diff', [DiffController::class, 'show']);
-Route::get('/diff-file/{name}', [DiffController::class, 'diff']);
+Route::get('/diff/{foldername}', [DiffController::class, 'show']);
+Route::get('/diff-file/{foldername}/{filename}', [DiffController::class, 'diff']);
