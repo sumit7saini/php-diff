@@ -22,10 +22,12 @@
 
 <style>
 
-    .diff-files tr {
-        cursor: pointer;
+    table.diff{
+        table-layout: fixed;
+        width: 100% ;
     }
-    .diff-files tr:hover {
+    .diff-files tbody tr:hover {
+        cursor: pointer;
         background-color: gray;
     }
     .diff-files th {
@@ -56,6 +58,7 @@
         background: #34495E;
         color: #fff;
         border-radius: .4em;
+        width: 100%;
     }
     div.file-header{
         padding: 5px 10px;

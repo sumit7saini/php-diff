@@ -18,7 +18,7 @@ class DiffController extends Controller
     public function index(){
         $path = storage_path('app/diff');
         $uploads = array();
-        if(Storage::exists('app/diff')){
+        if(is_dir($path)){
             $uploads = scandir($path);
             $uploads = array_diff($uploads, array('.', '..'));
         }
@@ -51,6 +51,8 @@ class DiffController extends Controller
         $path = storage_path('app/diff').'/'.$foldername;
         $filesv1 = scandir($path.'/v1');
         $filesv2 = scandir($path.'/v2');
+        $filesv1 = array_diff($filesv1, array('.', '..'));
+        $filesv2 = array_diff($filesv2, array('.', '..'));
         $common=array_intersect($filesv1,$filesv2);
         $onlyinv1=array_diff($filesv1, $common);
         $onlyinv2=array_diff($filesv2, $common);
