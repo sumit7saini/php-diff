@@ -17,8 +17,11 @@ class DiffController extends Controller
 
     public function index(){
         $path = storage_path('app/diff');
-        $uploads = scandir($path);
-        $uploads = array_diff($uploads, array('.', '..'));
+        $uploads = array();
+        if(Storage::exists('app/diff')){
+            $uploads = scandir($path);
+            $uploads = array_diff($uploads, array('.', '..'));
+        }
         return view('dashboard',['uploads' => $uploads]);
 
 
