@@ -16,7 +16,10 @@ class DiffController extends Controller
     //
 
     public function index(){
-        return view('dashboard');
+        $path = storage_path('app/diff');
+        $uploads = scandir($path);
+        $uploads = array_diff($uploads, array('.', '..'));
+        return view('dashboard',['uploads' => $uploads]);
 
 
     }
@@ -28,17 +31,12 @@ class DiffController extends Controller
         Storage::makeDirectory('diff/'.$time.'/v1');
         Storage::makeDirectory('diff/'.$time.'/v2');
 
-        if($request->hasfile('filesv2'))
-            $request->session()->put('files', 'abc');
-
-        $session_id = $request->session()->getId();
-
         foreach($request->file('filesv1') as $file) {
-            $file->move(storage_path('app/diff').'/'.$session_id.'/v1',$file->getClientOriginalName());
+            $file->move(storage_path('app/diff').'/'.$time.'/v1',$file->getClientOriginalName());
         }
 
         foreach($request->file('filesv2') as $file) {
-            $file->move(storage_path('app/diff').'/'.$session_id.'/v2',$file->getClientOriginalName());
+            $file->move(storage_path('app/diff').'/'.$time.'/v2',$file->getClientOriginalName());
         }
 
         return redirect('/diff/'.$time);
@@ -67,6 +65,6 @@ class DiffController extends Controller
         $newFile = $path . '/v2/' . $filename;
 
         $diff = Diff::toTable(Diff::compareFiles($oldFile, $newFile));
-        return view('difffile', ['data' => $diff]);
+        return view('difffile', ['data' => $diff, 'file' => $filename]);
     }
 }
